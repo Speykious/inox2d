@@ -4,6 +4,7 @@ Inochi2D node types to Inox2D components:
 - Part -> Drawable + TexturedMesh + Mesh
 - Composite -> Drawable + Composite
 - SimplePhysics -> SimplePhysics
+- MeshGroup -> MeshGroup + Mesh
 - Custom nodes by inheritance -> Custom nodes by composition
 */
 
@@ -197,14 +198,20 @@ pub struct Mesh {
 	pub origin: Vec2,
 }
 
+/* --- MESHGROUP --- */
+
+pub struct MeshGroup {
+	pub dynamic: bool,
+	pub translate_children: bool,
+}
+
 /* --- DEFORM STACK --- */
 
 /// Source of a deform.
 #[derive(Hash, PartialEq, Eq, Copy, Clone)]
-#[allow(unused)]
 pub(crate) enum DeformSource {
 	Param(ParamUuid),
-	Node(InoxNodeUuid),
+	MeshGroup(InoxNodeUuid),
 }
 
 /// Internal component solving for deforms of a node.
